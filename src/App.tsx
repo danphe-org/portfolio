@@ -3,6 +3,7 @@ import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { ProcessAndSkills } from './components/ProcessAndSkills';
 import { ContactFooter } from './components/ContactFooter';
+import { IntroCurtain } from './components/IntroCurtain';
 import { portfolioData } from './data/portfolioData';
 
 export const App: React.FC = () => {
@@ -18,6 +19,9 @@ export const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#080808] text-white relative selection:bg-[#e31b23] selection:text-white overflow-hidden">
+      {/* Cinematic Intro Curtain on First Load */}
+      <IntroCurtain />
+
       {/* Subtle interactive ambient cursor spotlight */}
       <div 
         className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300 opacity-70 hidden md:block"
@@ -31,7 +35,7 @@ export const App: React.FC = () => {
 
       {/* Main Content */}
       <main>
-        {/* Hero Section */}
+        {/* Full-Height Editorial Landing Hero Section */}
         <Hero data={portfolioData} />
 
         {/* Education & Skills Section */}

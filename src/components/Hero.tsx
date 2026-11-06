@@ -1,6 +1,6 @@
 import React from 'react';
 import { PortfolioData } from '../types/portfolio';
-import { Globe } from 'lucide-react';
+import { Globe, ChevronDown } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface HeroProps {
@@ -11,7 +11,7 @@ export const Hero: React.FC<HeroProps> = ({ data }) => {
   const heroImageSrc = data.hero.heroImage || data.hero.portraitImage || '/assets/hero2.png';
 
   return (
-    <section className="relative w-full overflow-hidden pt-0 pb-10 sm:pb-16 bg-[#080808]">
+    <section className="relative w-full overflow-hidden pt-0 pb-6 sm:pb-10 bg-[#080808]">
       {/* Background ambient red glow to complement the artwork atmosphere with gentle pulse */}
       <motion.div 
         animate={{
@@ -30,19 +30,19 @@ export const Hero: React.FC<HeroProps> = ({ data }) => {
       <div className="w-full relative z-10">
         
         {/* ============================================================ */}
-        {/* DESKTOP HERO VIEWPORT (lg: and above)                         */}
+        {/* DESKTOP FULL-VIEWPORT EDITORIAL LANDING (lg: and above)      */}
         {/* 100% Borderless artwork with integrated poster typography    */}
         {/* ============================================================ */}
-        <div className="hidden lg:block relative w-full">
+        <div className="hidden lg:block relative w-full h-[calc(100vh-65px)] min-h-[700px] max-h-[1050px] overflow-hidden">
           {/* Edge-to-Edge Image Container - ZERO BORDERS */}
-          <div className="relative w-full flex justify-center items-center select-none overflow-hidden">
+          <div className="relative w-full h-full flex justify-center items-center select-none overflow-hidden">
             <motion.img
               initial={{ scale: 1.04, opacity: 0.8 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
               src={heroImageSrc}
               alt={data.hero.name}
-              className="w-full h-auto object-cover object-top max-h-[860px] xl:max-h-[920px] 2xl:max-h-[980px] filter brightness-[0.98] contrast-[1.04] saturate-[1.02]"
+              className="w-full h-full object-cover object-top filter brightness-[0.98] contrast-[1.04] saturate-[1.02]"
             />
 
             {/* Seamless Vignettes & Edge Gradients */}
@@ -69,7 +69,7 @@ export const Hero: React.FC<HeroProps> = ({ data }) => {
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="col-span-6 xl:col-span-5 flex flex-col justify-center pointer-events-auto max-w-lg pt-20 lg:pt-28 xl:pt-36 space-y-3"
+              className="col-span-6 xl:col-span-5 flex flex-col justify-center pointer-events-auto max-w-lg pt-16 lg:pt-24 xl:pt-32 space-y-3"
             >
               {/* Script Greeting with subtle gentle sway */}
               <div>
@@ -116,7 +116,7 @@ export const Hero: React.FC<HeroProps> = ({ data }) => {
               initial={{ opacity: 0, x: 25 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="col-span-5 xl:col-span-5 flex flex-col justify-center items-end text-right pointer-events-auto pt-30 lg:pt-28 xl:pt-80 space-y-8"
+              className="col-span-5 xl:col-span-5 flex flex-col justify-center items-end text-right pointer-events-auto pt-28 lg:pt-24 xl:pt-72 space-y-8"
             >
               {/* Experience Block - Pure Typography, No Borders with spring hover */}
               <motion.div 
@@ -153,6 +153,19 @@ export const Hero: React.FC<HeroProps> = ({ data }) => {
               </motion.div>
             </motion.div>
 
+          </div>
+
+          {/* BOTTOM CENTER: EXPLORE SCROLL INDICATOR */}
+          <div className="absolute bottom-6 inset-x-0 flex justify-center items-center pointer-events-auto z-30">
+            <motion.a
+              href="#skills"
+              animate={{ y: [0, 5, 0] }}
+              transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+              className="group flex flex-col items-center gap-1 text-[10px] font-extrabold tracking-widest text-neutral-400 hover:text-white uppercase transition-colors select-none"
+            >
+              <span>EXPLORE</span>
+              <ChevronDown className="w-3.5 h-3.5 text-[#e31b23] group-hover:translate-y-0.5 transition-transform" />
+            </motion.a>
           </div>
         </div>
 
@@ -221,10 +234,23 @@ export const Hero: React.FC<HeroProps> = ({ data }) => {
           </div>
 
           {/* Short & Simple Introduction Underneath on Mobile */}
-          <div className="w-full max-w-xl sm:max-w-2xl mx-auto px-1">
+          <div className="w-full max-w-xl sm:max-w-2xl mx-auto px-1 space-y-4">
             <p className="text-xs sm:text-sm text-neutral-300 font-normal leading-relaxed text-center sm:text-left drop-shadow">
               {data.hero.bio}
             </p>
+
+            {/* Mobile Explore Scroll Indicator */}
+            <div className="pt-2 flex justify-center">
+              <motion.a
+                href="#skills"
+                animate={{ y: [0, 4, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="flex items-center gap-1.5 text-[10px] font-bold tracking-widest text-neutral-400 hover:text-white uppercase transition-colors"
+              >
+                <span>EXPLORE EDUCATION & SKILLS</span>
+                <ChevronDown className="w-3.5 h-3.5 text-[#e31b23]" />
+              </motion.a>
+            </div>
           </div>
         </div>
 
