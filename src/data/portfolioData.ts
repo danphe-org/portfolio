@@ -155,7 +155,7 @@ export const portfolioData: PortfolioData = {
     phone: '+977 9860881329',
     location: 'Kathmandu, Nepal / Remote',
     github: 'https://github.com/nishan9813',
-    linkedin: 'https://linkedin.com/in/nishan-magar',
+    linkedin: 'https://www.linkedin.com/in/nishan-magar-b55b64260/',
     instagram: 'https://www.instagram.com/_nishanrana_?xtok=MW5pc3pjY2prODUzbw%3D%3D',
     facebook: 'https://www.facebook.com/nishan.rana.magar.451681',
   },
