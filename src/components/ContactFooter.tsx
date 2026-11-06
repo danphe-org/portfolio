@@ -1,194 +1,155 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { PortfolioData } from '../types/portfolio';
 import { 
-  Mail, 
-  Globe, 
-  Phone, 
-  MapPin, 
   ArrowRight, 
-  Check, 
-  Copy, 
   Github, 
-  Linkedin,
-  ArrowUp
+  Linkedin, 
+  Instagram, 
+  Facebook 
 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface ContactFooterProps {
   data: PortfolioData;
 }
 
 export const ContactFooter: React.FC<ContactFooterProps> = ({ data }) => {
-  const [copiedEmail, setCopiedEmail] = useState(false);
-
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(data.contact.email);
-    setCopiedEmail(true);
-    setTimeout(() => setCopiedEmail(false), 2500);
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
     <footer id="contact" className="w-full pt-16 sm:pt-24 pb-12 bg-[#060606] text-white relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         
-        {/* Main 3-Column Footer Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center pb-16 border-b border-white/10">
+        {/* Main Footer Content: Left (Let's work together) & Right (Contact + Social Icons) */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7 }}
+          className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start pb-16"
+        >
           
-          {/* ============================================================ */}
-          {/* LEFT: TITLE & CALL TO ACTION (4 Cols) */}
-          {/* ============================================================ */}
-          <div className="lg:col-span-4 flex flex-col justify-center">
+          {/* Left Side: LET'S WORK TOGETHER */}
+          <div className="md:col-span-7 lg:col-span-8 max-w-2xl">
             <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black uppercase text-white leading-tight tracking-tight mb-4">
               <span>LET'S WORK</span>
               <div className="flex items-center gap-2 text-white">
-                <span>TOGETHER</span>
-                <span className="text-[#e31b23] text-3xl sm:text-4xl animate-pulse">✦</span>
+                <span>TOGETHER.</span>
+                <motion.span 
+                  animate={{ scale: [1, 1.25, 1], rotate: [0, 10, 0] }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                  className="text-[#e31b23] text-3xl sm:text-4xl inline-block"
+                >
+                  ✦
+                </motion.span>
               </div>
             </h2>
 
-            <p className="text-xs sm:text-sm text-neutral-400 font-normal leading-relaxed max-w-sm mb-8">
+            <p className="text-xs sm:text-sm text-neutral-400 font-normal leading-relaxed max-w-md mb-8">
               {data.contact.subheadline}
             </p>
 
-            {/* Pill button */}
+            {/* Pill button - Spring animated, no border */}
             <div>
-              <a
-                href={`mailto:${data.contact.email}?subject=Collaboration%20Inquiry`}
-                className="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-neutral-900 border border-neutral-700/80 hover:border-[#e31b23] text-white text-xs font-bold tracking-wider uppercase transition-all shadow-md group hover:bg-[#e31b23]"
+              <motion.a
+                href={`mailto:${data.contact.email}?subject=Project%20Inquiry%20-%20Backend%20Engineering`}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.96 }}
+                transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                className="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-neutral-900 text-white text-xs font-bold tracking-wider uppercase transition-colors group hover:bg-[#e31b23] border-0 outline-none"
               >
                 <div className="w-5 h-5 rounded-full bg-[#e31b23] group-hover:bg-white flex items-center justify-center transition-colors">
-                  <ArrowRight className="w-3 h-3 text-white group-hover:text-[#e31b23] group-hover:translate-x-0.5 transition-transform" />
+                  <ArrowRight className="w-3 h-3 text-white group-hover:text-[#e31b23] group-hover:translate-x-0.5 transition-all" />
                 </div>
                 <span>{data.contact.badge}</span>
-              </a>
+              </motion.a>
             </div>
           </div>
 
-          {/* ============================================================ */}
-          {/* MIDDLE: CONTACT DETAILS LIST (4 Cols) */}
-          {/* ============================================================ */}
-          <div className="lg:col-span-4 flex flex-col justify-center space-y-4">
-            {/* Email with copy button */}
-            <div className="group flex items-center justify-between p-3.5 rounded-xl bg-neutral-900/60 border border-neutral-800/80 hover:border-[#e31b23]/50 transition-all">
+          {/* Right Side: Contact heading & Social Media Icons */}
+          <div className="md:col-span-5 lg:col-span-4 flex flex-col md:items-end justify-start pt-2">
+            <div className="flex flex-col md:items-end">
+              <span className="text-xs sm:text-sm font-bold tracking-widest uppercase text-neutral-400 mb-4 block">
+                Contact
+              </span>
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-neutral-800 text-neutral-300 group-hover:text-[#e31b23] transition-colors">
-                  <Mail className="w-4 h-4" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-[10px] uppercase font-bold tracking-wider text-neutral-400">
-                    Email
-                  </span>
-                  <a
-                    href={`mailto:${data.contact.email}`}
-                    className="text-xs sm:text-sm text-neutral-200 group-hover:text-white transition-colors font-medium font-mono"
-                  >
-                    {data.contact.email}
-                  </a>
-                </div>
-              </div>
+                <motion.a
+                  href={data.contact.linkedin || 'https://linkedin.com/in/nishan-magar'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  whileHover={{ scale: 1.15, y: -3, rotate: 3 }}
+                  whileTap={{ scale: 0.92 }}
+                  transition={{ type: "spring", stiffness: 450, damping: 17 }}
+                  className="w-11 h-11 rounded-full bg-neutral-900 text-neutral-300 hover:text-white hover:bg-[#0077b5] flex items-center justify-center transition-colors group border-0 outline-none shadow-lg hover:shadow-[0_4px_20px_rgba(0,119,181,0.4)]"
+                  title="LinkedIn"
+                >
+                  <Linkedin className="w-5 h-5 group-hover:scale-110 transition-transform text-[#0077b5] group-hover:text-white" />
+                </motion.a>
 
-              <button
-                onClick={handleCopyEmail}
-                className="p-2 rounded-lg bg-neutral-800/80 hover:bg-[#e31b23] text-neutral-400 hover:text-white transition-colors"
-                title="Copy email address"
-              >
-                {copiedEmail ? (
-                  <Check className="w-4 h-4 text-emerald-400" />
-                ) : (
-                  <Copy className="w-4 h-4" />
-                )}
-              </button>
-            </div>
+                <motion.a
+                  href={data.contact.github || 'https://github.com/nishan9813'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub"
+                  whileHover={{ scale: 1.15, y: -3, rotate: -3 }}
+                  whileTap={{ scale: 0.92 }}
+                  transition={{ type: "spring", stiffness: 450, damping: 17 }}
+                  className="w-11 h-11 rounded-full bg-neutral-900 text-neutral-300 hover:text-white hover:bg-neutral-800 flex items-center justify-center transition-colors group border-0 outline-none shadow-lg hover:shadow-[0_4px_20px_rgba(255,255,255,0.15)]"
+                  title="GitHub"
+                >
+                  <Github className="w-5 h-5 group-hover:scale-110 transition-transform text-white" />
+                </motion.a>
 
-            {/* Website */}
-            <div className="group flex items-center justify-between p-3.5 rounded-xl bg-neutral-900/60 border border-neutral-800/80 hover:border-[#e31b23]/50 transition-all">
-              <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-neutral-800 text-neutral-300 group-hover:text-[#e31b23] transition-colors">
-                  <Globe className="w-4 h-4" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-[10px] uppercase font-bold tracking-wider text-neutral-400">
-                    Website / Portfolio
-                  </span>
-                  <a
-                    href={`https://${data.contact.website.replace(/^https?:\/\//, '')}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs sm:text-sm text-neutral-200 group-hover:text-white transition-colors font-medium"
-                  >
-                    {data.contact.website}
-                  </a>
-                </div>
-              </div>
-            </div>
+                <motion.a
+                  href={data.contact.instagram || 'https://instagram.com/'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  whileHover={{ scale: 1.15, y: -3, rotate: 3 }}
+                  whileTap={{ scale: 0.92 }}
+                  transition={{ type: "spring", stiffness: 450, damping: 17 }}
+                  className="w-11 h-11 rounded-full bg-neutral-900 text-neutral-300 hover:text-white hover:bg-gradient-to-tr hover:from-[#833ab4] hover:via-[#fd1d1d] hover:to-[#fcb045] flex items-center justify-center transition-colors group border-0 outline-none shadow-lg hover:shadow-[0_4px_20px_rgba(225,48,108,0.4)]"
+                  title="Instagram"
+                >
+                  <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform text-[#E1306C] group-hover:text-white" />
+                </motion.a>
 
-            {/* Phone */}
-            <div className="group flex items-center justify-between p-3.5 rounded-xl bg-neutral-900/60 border border-neutral-800/80 hover:border-[#e31b23]/50 transition-all">
-              <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-neutral-800 text-neutral-300 group-hover:text-[#e31b23] transition-colors">
-                  <Phone className="w-4 h-4" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-[10px] uppercase font-bold tracking-wider text-neutral-400">
-                    Phone / WhatsApp
-                  </span>
-                  <span className="text-xs sm:text-sm text-neutral-200 font-mono">
-                    {data.contact.phone}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Location */}
-            <div className="group flex items-center justify-between p-3.5 rounded-xl bg-neutral-900/60 border border-neutral-800/80 hover:border-[#e31b23]/50 transition-all">
-              <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-neutral-800 text-neutral-300 group-hover:text-[#e31b23] transition-colors">
-                  <MapPin className="w-4 h-4" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-[10px] uppercase font-bold tracking-wider text-neutral-400">
-                    Location
-                  </span>
-                  <span className="text-xs sm:text-sm text-neutral-200">
-                    {data.contact.location}
-                  </span>
-                </div>
+                <motion.a
+                  href={data.contact.facebook || 'https://facebook.com/'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
+                  whileHover={{ scale: 1.15, y: -3, rotate: -3 }}
+                  whileTap={{ scale: 0.92 }}
+                  transition={{ type: "spring", stiffness: 450, damping: 17 }}
+                  className="w-11 h-11 rounded-full bg-neutral-900 text-neutral-300 hover:text-white hover:bg-[#1877F2] flex items-center justify-center transition-colors group border-0 outline-none shadow-lg hover:shadow-[0_4px_20px_rgba(24,119,242,0.4)]"
+                  title="Facebook"
+                >
+                  <Facebook className="w-5 h-5 group-hover:scale-110 transition-transform text-[#1877F2] group-hover:text-white" />
+                </motion.a>
               </div>
             </div>
           </div>
 
-          {/* ============================================================ */}
-          {/* RIGHT: DESK / LAPTOP MOCKUP (4 Cols) */}
-          {/* ============================================================ */}
-          <div className="lg:col-span-4 flex justify-center items-center">
-            <div className="relative w-full max-w-sm rounded-xl overflow-hidden border border-neutral-800 group shadow-2xl">
-              <img
-                src="/assets/workspace-desk.jpg"
-                alt="Workspace desk setup"
-                className="w-full h-auto object-cover filter contrast-[1.05] brightness-90 group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] text-neutral-400">
-                <span className="font-mono text-neutral-300">workspace.env: ready</span>
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-              </div>
-            </div>
-          </div>
-
-        </div>
+        </motion.div>
 
         {/* Bottom Sub-bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-400">
           <div className="flex items-center gap-2">
-            <span>© {new Date().getFullYear()} {data.hero.name}. All rights reserved.</span>
+            <span>© {new Date().getFullYear()} {data.hero.name}  ·  Kathmandu, Nepal</span>
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center gap-5 sm:gap-6">
             <a
-              href="https://github.com"
+              href={data.contact.linkedin || 'https://linkedin.com/in/nishan-magar'}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors flex items-center gap-1.5"
+            >
+              <Linkedin className="w-3.5 h-3.5 text-[#0077b5]" />
+              <span>LinkedIn</span>
+            </a>
+            <a
+              href={data.contact.github || 'https://github.com/nishan9813'}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-white transition-colors flex items-center gap-1.5"
@@ -197,22 +158,23 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({ data }) => {
               <span>GitHub</span>
             </a>
             <a
-              href="https://linkedin.com"
+              href={data.contact.instagram || 'https://instagram.com/'}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-white transition-colors flex items-center gap-1.5"
             >
-              <Linkedin className="w-3.5 h-3.5" />
-              <span>LinkedIn</span>
+              <Instagram className="w-3.5 h-3.5 text-[#E1306C]" />
+              <span>Instagram</span>
             </a>
-            <button
-              onClick={scrollToTop}
-              className="flex items-center gap-1 text-neutral-400 hover:text-[#e31b23] transition-colors ml-4"
-              title="Back to top"
+            <a
+              href={data.contact.facebook || 'https://facebook.com/'}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors flex items-center gap-1.5"
             >
-              <span>TOP</span>
-              <ArrowUp className="w-3.5 h-3.5" />
-            </button>
+              <Facebook className="w-3.5 h-3.5 text-[#1877F2]" />
+              <span>Facebook</span>
+            </a>
           </div>
         </div>
 

@@ -43,6 +43,7 @@ export interface PortfolioData {
     calloutText: string;
     stats: StatItem[];
     portraitImage: string;
+    heroImage?: string;
     fallbackInitials?: string;
   };
   projects: ProjectItem[];
@@ -65,5 +66,7 @@ export interface PortfolioData {
     location: string;
     github?: string;
     linkedin?: string;
+    instagram?: string;
+    facebook?: string;
   };
 }

@@ -1,77 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
-import { Projects } from './components/Projects';
 import { ProcessAndSkills } from './components/ProcessAndSkills';
 import { ContactFooter } from './components/ContactFooter';
-import { CustomizerDrawer } from './components/CustomizerDrawer';
-import { templatePreset, backendFullstackPreset } from './data/portfolioData';
-import { SlidersHorizontal } from 'lucide-react';
+import { portfolioData } from './data/portfolioData';
 
 export const App: React.FC = () => {
-  const [activePreset, setActivePreset] = useState<'template' | 'backend'>('template');
-  const [customPhotoUrl, setCustomPhotoUrl] = useState<string | null>(null);
-  const [isCustomizerOpen, setIsCustomizerOpen] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
 
-  // Active portfolio data based on selected preset
-  const data = activePreset === 'template' ? templatePreset : backendFullstackPreset;
-
-  const handleTogglePreset = () => {
-    setActivePreset((prev) => (prev === 'template' ? 'backend' : 'template'));
-  };
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   return (
-    <div className="min-h-screen bg-[#080808] text-white relative selection:bg-[#e31b23] selection:text-white">
-      {/* Top Navbar */}
-      <Navbar
-        data={data}
-        activePreset={activePreset}
-        onTogglePreset={handleTogglePreset}
-        onOpenCustomizer={() => setIsCustomizerOpen(true)}
+    <div className="min-h-screen bg-[#080808] text-white relative selection:bg-[#e31b23] selection:text-white overflow-hidden">
+      {/* Subtle interactive ambient cursor spotlight */}
+      <div 
+        className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300 opacity-70 hidden md:block"
+        style={{
+          background: `radial-gradient(650px circle at ${mousePos.x}px ${mousePos.y}px, rgba(227, 27, 35, 0.06), transparent 80%)`,
+        }}
       />
+
+      {/* Top Navbar */}
+      <Navbar data={portfolioData} />
 
       {/* Main Content */}
       <main>
         {/* Hero Section */}
-        <Hero
-          data={data}
-          customPhotoUrl={customPhotoUrl}
-          onUploadClick={() => setIsCustomizerOpen(true)}
-        />
+        <Hero data={portfolioData} />
 
-        {/* Selected Projects */}
-        <Projects projects={data.projects} />
-
-        {/* 3-Column Skills, Process & Philosophy */}
-        <ProcessAndSkills data={data} />
+        {/* Education & Skills Section */}
+        <ProcessAndSkills data={portfolioData} />
       </main>
 
       {/* Contact & Footer */}
-      <ContactFooter data={data} />
-
-      {/* Floating Customizer Trigger Widget */}
-      <div className="fixed bottom-6 right-6 z-40">
-        <button
-          onClick={() => setIsCustomizerOpen(true)}
-          className="flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-neutral-900/90 border border-neutral-700 hover:border-[#e31b23] text-white shadow-2xl backdrop-blur-md transition-all hover:scale-105 group"
-          title="Customize portfolio & toggle presets"
-        >
-          <SlidersHorizontal className="w-4 h-4 text-[#e31b23] group-hover:rotate-45 transition-transform" />
-          <span className="text-xs font-bold uppercase tracking-wider hidden sm:inline">
-            Customize
-          </span>
-        </button>
-      </div>
-
-      {/* Customizer Settings Drawer */}
-      <CustomizerDrawer
-        isOpen={isCustomizerOpen}
-        onClose={() => setIsCustomizerOpen(false)}
-        activePreset={activePreset}
-        onSelectPreset={(preset) => setActivePreset(preset)}
-        customPhotoUrl={customPhotoUrl}
-        onPhotoSelected={(url) => setCustomPhotoUrl(url)}
-      />
+      <ContactFooter data={portfolioData} />
     </div>
   );
 };

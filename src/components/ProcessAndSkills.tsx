@@ -1,196 +1,272 @@
 import React from 'react';
 import { PortfolioData } from '../types/portfolio';
-import { 
-  Search, 
-  Lightbulb, 
-  PenTool, 
-  Code2, 
-  Send, 
-  Sparkles,
-  ArrowRight
-} from 'lucide-react';
+import { GraduationCap, Code2, Database, Cloud } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface ProcessAndSkillsProps {
   data: PortfolioData;
 }
 
 export const ProcessAndSkills: React.FC<ProcessAndSkillsProps> = ({ data }) => {
-  // Map step icon string to Lucide icon
-  const getStepIcon = (icon: string) => {
-    switch (icon) {
-      case 'search':
-        return <Search className="w-3.5 h-3.5 text-neutral-300" />;
-      case 'ideate':
-        return <Lightbulb className="w-3.5 h-3.5 text-neutral-300" />;
-      case 'design':
-        return <PenTool className="w-3.5 h-3.5 text-neutral-300" />;
-      case 'develop':
-        return <Code2 className="w-3.5 h-3.5 text-neutral-300" />;
-      case 'deliver':
-        return <Send className="w-3.5 h-3.5 text-neutral-300" />;
-      default:
-        return <Sparkles className="w-3.5 h-3.5 text-neutral-300" />;
-    }
-  };
-
   return (
-    <section id="skills" className="w-full py-16 sm:py-20 border-b border-white/5 bg-[#080808]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-10">
+    <section id="skills" className="w-full py-16 sm:py-24 bg-[#080808]">
+      <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+        
+        {/* Section Header with smooth viewport reveal */}
+        <motion.div 
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col sm:flex-row sm:items-end justify-between pb-6 mb-10 sm:mb-14"
+        >
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="w-2 h-2 rounded-full bg-[#e31b23] animate-pulse" />
+              <span className="text-xs font-bold tracking-widest uppercase text-[#e31b23]">
+                BACKGROUND & EXPERTISE
+              </span>
+            </div>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-black uppercase text-white tracking-tight">
+              EDUCATION & SKILLS
+            </h2>
+          </div>
+          <p className="text-xs text-neutral-400 mt-2 sm:mt-0 max-w-sm">
+            Academic foundation, production systems training, and core technical proficiencies
+          </p>
+        </motion.div>
 
+        {/* 2-Column Responsive Layout: Left Education (5 cols), Right Skills (7 cols) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+          
           {/* ============================================================ */}
-          {/* COLUMN 1: EDUCATION & SKILLS (4 Cols) */}
+          {/* COLUMN 1: EDUCATION & TRAINING (5 Cols)                      */}
           {/* ============================================================ */}
-          <div className="lg:col-span-4 flex flex-col justify-between space-y-8">
-            <div>
-              {/* Header */}
-              <h2 className="text-sm sm:text-base font-extrabold tracking-widest uppercase text-white pb-4 border-b border-white/10 mb-6">
-                EDUCATION & SKILLS
-              </h2>
+          <div className="lg:col-span-5 space-y-6">
+            <div className="flex items-center gap-2 pb-3 text-white font-extrabold tracking-widest text-xs uppercase">
+              <GraduationCap className="w-4 h-4 text-[#e31b23]" />
+              <span>ACADEMIC & PROFESSIONAL EDUCATION</span>
+            </div>
 
-              {/* EDUCATION SUB-BLOCK */}
-              <div className="space-y-4 mb-8">
-                <span className="text-xs font-bold tracking-wider uppercase text-[#e31b23] block">
-                  EDUCATION
-                </span>
-
-                <div className="space-y-4">
-                  {data.education.map((edu, idx) => (
-                    <div key={idx} className="flex items-start justify-between gap-3 group">
-                      <div>
-                        <h4 className="text-xs sm:text-sm font-semibold text-white group-hover:text-neutral-200 transition-colors">
-                          {edu.degree}
-                        </h4>
-                        <p className="text-[11px] sm:text-xs text-neutral-400 mt-0.5">
-                          {edu.institution}
-                        </p>
-                      </div>
-                      <span className="text-[11px] font-bold text-[#e31b23] shrink-0 font-mono">
-                        {edu.period}
+            <div className="space-y-4">
+              {data.education.map((edu, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.15 }}
+                  whileHover={{ y: -4, backgroundColor: "rgba(23, 23, 23, 0.7)" }}
+                  className="p-5 sm:p-6 rounded-2xl bg-neutral-900/40 transition-all duration-300 group hover:shadow-xl hover:shadow-red-950/20 cursor-default"
+                >
+                  <div className="flex items-center justify-between gap-3 mb-2">
+                    <span className="font-mono text-xs font-bold text-[#e31b23] px-2.5 py-0.5 rounded-full bg-[#e31b23]/10">
+                      {edu.period}
+                    </span>
+                    {edu.badge && (
+                      <span className="text-[10px] font-semibold tracking-wider text-neutral-400 uppercase">
+                        {edu.badge}
                       </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+                    )}
+                  </div>
 
-              {/* SKILLS SUB-BLOCK */}
-              <div>
-                <span className="text-xs font-bold tracking-wider uppercase text-[#e31b23] block mb-3.5">
-                  SKILLS
+                  <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-neutral-100 transition-colors">
+                    {edu.degree}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-neutral-400 mt-1">
+                    {edu.institution}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Philosophy Quote Box with subtle breathing aura */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              whileHover={{ scale: 1.01 }}
+              className="p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-[#1a0507] via-[#120405] to-[#0a0203] relative overflow-hidden"
+            >
+              <motion.div 
+                animate={{
+                  scale: [1, 1.25, 1],
+                  opacity: [0.15, 0.3, 0.15],
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="absolute top-0 right-0 w-28 h-28 bg-[#e31b23]/15 blur-2xl pointer-events-none rounded-full" 
+              />
+              <p className="text-xs sm:text-sm text-neutral-300 italic leading-relaxed relative z-10">
+                "{data.quote.text}"
+              </p>
+              <div className="flex items-center justify-between mt-3 pt-3 relative z-10">
+                <span className="text-[11px] font-bold text-[#e31b23] uppercase tracking-widest">
+                  — {data.quote.author}
                 </span>
+                <span className="font-script text-xl text-neutral-200 -rotate-3 select-none">
+                  {data.quote.signatureName}
+                </span>
+              </div>
+            </motion.div>
+          </div>
 
+          {/* ============================================================ */}
+          {/* COLUMN 2: TECHNICAL SKILLS MATRIX (7 Cols)                  */}
+          {/* ============================================================ */}
+          <div className="lg:col-span-7 space-y-6">
+            <div className="flex items-center gap-2 pb-3 text-white font-extrabold tracking-widest text-xs uppercase">
+              <Code2 className="w-4 h-4 text-[#e31b23]" />
+              <span>TECHNICAL SKILLS & DOMAIN EXPERTISE</span>
+            </div>
+
+            {/* Categorized Skills Stack */}
+            <div className="space-y-4">
+              
+              {/* Category 1: Backend Architecture & Core Java */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                whileHover={{ y: -2 }}
+                className="p-5 sm:p-6 rounded-2xl bg-neutral-900/40 space-y-3.5 transition-all"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#e31b23]" />
+                    <span className="text-xs font-bold tracking-wider uppercase text-neutral-200">
+                      BACKEND ARCHITECTURE & ENTERPRISE JAVA
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-mono text-[#e31b23] font-bold">CORE</span>
+                </div>
+                
                 <div className="flex flex-wrap gap-2">
-                  {data.skills.map((skill, idx) => (
-                    <span
-                      key={idx}
-                      className="px-2.5 py-1 text-[11px] font-medium tracking-wide uppercase bg-neutral-900/90 border border-neutral-800 text-neutral-300 rounded hover:border-[#e31b23]/60 hover:text-white transition-all shadow-sm"
+                  {[
+                    'JAVA (ADVANCED)',
+                    'SPRING BOOT 4',
+                    'JAKARTA EE',
+                    'REST APIS & OPENAPI',
+                    'SPRING SECURITY & JWT',
+                    'BUCKET4J RATE LIMITING',
+                  ].map((skill) => (
+                    <motion.span
+                      key={skill}
+                      whileHover={{ 
+                        scale: 1.08, 
+                        y: -2,
+                        backgroundColor: "#1c1c1f",
+                        color: "#ffffff"
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                      transition={{ type: "spring", stiffness: 450, damping: 20 }}
+                      className="px-3 py-1.5 rounded-lg bg-neutral-950 text-neutral-200 text-xs font-semibold uppercase tracking-wide transition-colors shadow-sm cursor-pointer select-none inline-block"
                     >
                       {skill}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
-              </div>
-            </div>
-          </div>
+              </motion.div>
 
-          {/* ============================================================ */}
-          {/* COLUMN 2: WORK PROCESS (4 Cols) */}
-          {/* ============================================================ */}
-          <div id="process" className="lg:col-span-4 flex flex-col">
-            <h2 className="text-sm sm:text-base font-extrabold tracking-widest uppercase text-white pb-4 border-b border-white/10 mb-6">
-              WORK PROCESS
-            </h2>
-
-            {/* Timeline container */}
-            <div className="relative pl-1 space-y-6">
-              {data.process.map((step, idx) => {
-                const isLast = idx === data.process.length - 1;
-
-                return (
-                  <div key={idx} className="relative flex items-start gap-4 group">
-                    {/* Step Number in Red (01, 02, etc.) */}
-                    <span className="font-display text-sm font-bold text-[#e31b23] w-5 pt-0.5 shrink-0 text-right">
-                      {step.step}
+              {/* Category 2: Databases & Persistence */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                whileHover={{ y: -2 }}
+                className="p-5 sm:p-6 rounded-2xl bg-neutral-900/40 space-y-3.5 transition-all"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Database className="w-3.5 h-3.5 text-[#e31b23]" />
+                    <span className="text-xs font-bold tracking-wider uppercase text-neutral-200">
+                      DATABASE SYSTEMS & ORM PERSISTENCE
                     </span>
-
-                    {/* Icon with connecting vertical line */}
-                    <div className="relative flex flex-col items-center shrink-0">
-                      <div className="w-7 h-7 rounded-full bg-neutral-900 border border-neutral-700/80 group-hover:border-[#e31b23] flex items-center justify-center transition-colors shadow-sm">
-                        {getStepIcon(step.icon)}
-                      </div>
-                      {!isLast && (
-                        <div className="w-[1px] h-10 bg-neutral-800 group-hover:bg-[#e31b23]/30 transition-colors my-1" />
-                      )}
-                    </div>
-
-                    {/* Step Content */}
-                    <div className="pb-1">
-                      <h4 className="text-xs font-bold tracking-wider uppercase text-[#e31b23] group-hover:text-white transition-colors">
-                        {step.title}
-                      </h4>
-                      <p className="text-xs text-neutral-400 font-normal leading-relaxed mt-0.5">
-                        {step.description}
-                      </p>
-                    </div>
                   </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* ============================================================ */}
-          {/* COLUMN 3: QUOTE / TESTIMONIAL CARD (4 Cols) */}
-          {/* Distinctive Deep Crimson Card Matching Reference Poster */}
-          {/* ============================================================ */}
-          <div className="lg:col-span-4 flex flex-col">
-            <div className="relative h-full rounded-2xl p-7 sm:p-8 flex flex-col justify-between overflow-hidden bg-gradient-to-br from-[#3b090d] via-[#240507] to-[#120204] border border-[#5c1016] shadow-xl group hover:border-[#85161f] transition-all duration-300">
-              
-              {/* Subtle crimson radial glow inside card */}
-              <div className="absolute top-0 right-0 w-36 h-36 bg-[#e31b23]/15 blur-3xl pointer-events-none rounded-full" />
-
-              {/* Top Quote Icon */}
-              <div>
-                <div className="text-[#e31b23] opacity-80 mb-4">
-                  <span className="font-serif text-6xl leading-none block select-none">
-                    “
-                  </span>
+                  <span className="text-[10px] font-mono text-[#e31b23] font-bold">SQL / NOSQL</span>
                 </div>
-
-                {/* Big Quote Text */}
-                <blockquote className="text-base sm:text-lg font-bold text-white leading-snug tracking-tight mb-8">
-                  {data.quote.text}
-                </blockquote>
-              </div>
-
-              {/* Author Signature & Callout */}
-              <div className="pt-6 border-t border-white/10">
-                {/* Handwritten Script Signature */}
-                <div className="mb-4">
-                  <span className="font-script text-3xl sm:text-4xl text-neutral-100 font-normal tracking-wide block -rotate-3 select-none drop-shadow">
-                    {data.quote.signatureName}
-                  </span>
+                
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    'POSTGRESQL',
+                    'MYSQL',
+                    'MYBATIS',
+                    'HIBERNATE',
+                    'FLYWAY MIGRATIONS',
+                    'MONGODB',
+                  ].map((skill) => (
+                    <motion.span
+                      key={skill}
+                      whileHover={{ 
+                        scale: 1.08, 
+                        y: -2,
+                        backgroundColor: "#1c1c1f",
+                        color: "#ffffff"
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                      transition={{ type: "spring", stiffness: 450, damping: 20 }}
+                      className="px-3 py-1.5 rounded-lg bg-neutral-950 text-neutral-200 text-xs font-semibold uppercase tracking-wide transition-colors shadow-sm cursor-pointer select-none inline-block"
+                    >
+                      {skill}
+                    </motion.span>
+                  ))}
                 </div>
+              </motion.div>
 
-                {/* Bottom Callout & Action */}
-                <div className="flex flex-col gap-2">
-                  <span className="text-[10px] sm:text-[11px] font-extrabold tracking-widest uppercase text-neutral-300">
-                    {data.quote.ctaNote}
-                  </span>
-
-                  <a
-                    href="#contact"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#e31b23] hover:text-white uppercase tracking-wider transition-colors pt-1"
-                  >
-                    <span>Start a Conversation</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </a>
+              {/* Category 3: Cloud & DevOps */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                whileHover={{ y: -2 }}
+                className="p-5 sm:p-6 rounded-2xl bg-neutral-900/40 space-y-3.5 transition-all"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Cloud className="w-3.5 h-3.5 text-[#e31b23]" />
+                    <span className="text-xs font-bold tracking-wider uppercase text-neutral-200">
+                      CONTAINERS, CLOUD & CI/CD AUTOMATION
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-mono text-[#e31b23] font-bold">DEVOPS</span>
                 </div>
-              </div>
+                
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    'DOCKER & CONTAINERS',
+                    'JENKINS CI/CD',
+                    'AWS S3 & CLOUD',
+                  ].map((skill) => (
+                    <motion.span
+                      key={skill}
+                      whileHover={{ 
+                        scale: 1.08, 
+                        y: -2,
+                        backgroundColor: "#1c1c1f",
+                        color: "#ffffff"
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                      transition={{ type: "spring", stiffness: 450, damping: 20 }}
+                      className="px-3 py-1.5 rounded-lg bg-neutral-950 text-neutral-200 text-xs font-semibold uppercase tracking-wide transition-colors shadow-sm cursor-pointer select-none inline-block"
+                    >
+                      {skill}
+                    </motion.span>
+                  ))}
+                </div>
+              </motion.div>
 
             </div>
           </div>
 
         </div>
+
       </div>
     </section>
   );
