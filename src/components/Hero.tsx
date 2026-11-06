@@ -171,87 +171,88 @@ export const Hero: React.FC<HeroProps> = ({ data }) => {
 
         {/* ============================================================ */}
         {/* MOBILE & TABLET RESPONSIVE LAYOUT (< lg)                     */}
-        {/* Poster view: Left elements top, Right elements bottom        */}
-        {/* ZERO BORDERS so it looks like part of the image              */}
+        {/* Clean, perfectly proportioned flow with zero overlap         */}
         {/* ============================================================ */}
-        <div className="lg:hidden w-full px-4 sm:px-6 flex flex-col items-center gap-4 pt-2">
-          {/* Centered Borderless Image Card */}
-          <div className="relative w-full max-w-xl sm:max-w-2xl mx-auto overflow-hidden flex justify-center items-center">
-            <div className="relative w-full">
-              <img
-                src={heroImageSrc}
-                alt={data.hero.name}
-                className="w-full h-auto object-cover object-top filter brightness-[0.98] contrast-[1.04] saturate-[1.02]"
-              />
-
-              {/* Gradient overlays for seamless blending into dark background */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-[#080808]/75 pointer-events-none" />
-              <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#080808] to-transparent pointer-events-none" />
-              <div className="absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-[#080808] to-transparent pointer-events-none" />
-              <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#080808] to-transparent pointer-events-none" />
-              <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#080808] to-transparent pointer-events-none" />
-
-              {/* Top: Greetings, Name & Role (Left Elements) - NO BORDERS */}
-              <div className="absolute top-4 sm:top-6 inset-x-0 p-4 sm:p-6 z-10 pointer-events-auto">
-                <div className="mb-1">
-                  <span className="font-script text-2xl sm:text-3xl text-neutral-100 -rotate-6 inline-block select-none drop-shadow-md">
-                    {data.hero.greeting || "Hello, I am"}
-                  </span>
-                </div>
-                <h1 className="font-display uppercase text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white leading-[0.9] drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)]">
-                  {data.hero.name}
-                </h1>
-                <div className="flex items-center gap-1.5 mt-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#e31b23] animate-pulse" />
-                  <span className="text-[11px] sm:text-xs font-bold tracking-wider uppercase text-[#e31b23] drop-shadow">
-                    {data.hero.title}
-                  </span>
-                </div>
-              </div>
-
-              {/* Bottom: Location & Experience (Right Elements) - NO BORDERS */}
-              <div className="absolute bottom-3 inset-x-0 px-4 sm:px-6 z-10 flex items-end justify-between gap-2 pointer-events-auto">
-                {/* Location */}
-                <div className="flex flex-col">
-                  <span className="text-[9px] font-bold tracking-widest text-neutral-400 uppercase">LOCATION</span>
-                  <div className="flex items-center gap-1 text-white text-xs sm:text-sm font-bold uppercase drop-shadow">
-                    <Globe className="w-3.5 h-3.5 text-[#e31b23]" />
-                    <span>KATHMANDU, NEPAL</span>
-                  </div>
-                </div>
-
-                {/* Experience */}
-                <div className="flex flex-col items-end text-right">
-                  <span className="text-[9px] font-bold tracking-widest text-neutral-400 uppercase">EXPERIENCE</span>
-                  <span className="font-display text-2xl sm:text-3xl font-black text-[#e31b23] leading-none drop-shadow">
-                    2+ YEARS
-                  </span>
-                  <span className="text-[10px] font-bold text-neutral-300 uppercase">PRODUCTION</span>
-                </div>
-              </div>
-
+        <div className="lg:hidden w-full px-4 sm:px-6 flex flex-col gap-6 pt-4 pb-8">
+          
+          {/* 1. Header Typography: Greetings, Name & Role */}
+          <div className="flex flex-col space-y-2">
+            <div>
+              <span className="font-script text-2xl sm:text-3xl text-neutral-200 -rotate-3 inline-block select-none">
+                {data.hero.greeting || "Hello, I am"}
+              </span>
             </div>
-          </div>
 
-          {/* Short & Simple Introduction Underneath on Mobile */}
-          <div className="w-full max-w-xl sm:max-w-2xl mx-auto px-1 space-y-4">
-            <p className="text-xs sm:text-sm text-neutral-300 font-normal leading-relaxed text-center sm:text-left drop-shadow">
+            <h1 className="font-display uppercase text-4xl sm:text-5xl font-black tracking-tight text-white leading-[0.92]">
+              {data.hero.name}
+            </h1>
+
+            <div className="flex items-center gap-2 pt-1">
+              <span className="w-2 h-2 rounded-full bg-[#e31b23] animate-pulse" />
+              <span className="text-xs sm:text-sm font-extrabold tracking-widest uppercase text-[#e31b23]">
+                {data.hero.title}
+              </span>
+            </div>
+
+            <p className="text-xs sm:text-sm text-neutral-300 font-normal leading-relaxed pt-1">
               {data.hero.bio}
             </p>
+          </div>
 
-            {/* Mobile Explore Scroll Indicator */}
-            <div className="pt-2 flex justify-center">
-              <motion.a
-                href="#skills"
-                animate={{ y: [0, 4, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                className="flex items-center gap-1.5 text-[10px] font-bold tracking-widest text-neutral-400 hover:text-white uppercase transition-colors"
-              >
-                <span>EXPLORE EDUCATION & SKILLS</span>
-                <ChevronDown className="w-3.5 h-3.5 text-[#e31b23]" />
-              </motion.a>
+          {/* 2. Visual Portrait Artwork (Clear and unobstructed) */}
+          <div className="relative w-full h-[260px] sm:h-[340px] rounded-2xl overflow-hidden bg-neutral-950 flex items-center justify-center">
+            <img
+              src={heroImageSrc}
+              alt={data.hero.name}
+              className="w-full h-full object-cover object-top filter brightness-[0.98] contrast-[1.04]"
+            />
+            {/* Top and bottom subtle gradient blend */}
+            <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#080808] to-transparent pointer-events-none" />
+            <div className="absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-[#080808] to-transparent pointer-events-none" />
+          </div>
+
+          {/* 3. Experience & Location Grid - Clean, Side by Side */}
+          <div className="grid grid-cols-2 gap-4 pt-1">
+            {/* Location */}
+            <div className="flex flex-col">
+              <span className="text-[10px] font-extrabold tracking-widest text-neutral-400 uppercase mb-0.5">
+                LOCATION
+              </span>
+              <div className="flex items-center gap-1.5 text-white">
+                <span className="font-display text-lg sm:text-xl font-bold uppercase tracking-wide">
+                  KATHMANDU, NEPAL
+                </span>
+                <Globe className="w-4 h-4 text-[#e31b23] animate-pulse flex-shrink-0" />
+              </div>
+            </div>
+
+            {/* Experience */}
+            <div className="flex flex-col items-end text-right">
+              <span className="text-[10px] font-extrabold tracking-widest text-neutral-400 uppercase mb-0.5">
+                EXPERIENCE
+              </span>
+              <span className="font-display text-2xl sm:text-3xl font-black text-[#e31b23] leading-none">
+                2+ YEARS
+              </span>
+              <span className="text-[10px] font-bold text-neutral-300 uppercase mt-0.5">
+                PRODUCTION JAVA / FULLSTACK
+              </span>
             </div>
           </div>
+
+          {/* 4. Explore Scroll Indicator */}
+          <div className="pt-2 flex justify-center">
+            <motion.a
+              href="#skills"
+              animate={{ y: [0, 4, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="flex items-center gap-1.5 text-[10px] font-bold tracking-widest text-neutral-400 hover:text-white uppercase transition-colors"
+            >
+              <span>EXPLORE EDUCATION & SKILLS</span>
+              <ChevronDown className="w-3.5 h-3.5 text-[#e31b23]" />
+            </motion.a>
+          </div>
+
         </div>
 
       </div>
