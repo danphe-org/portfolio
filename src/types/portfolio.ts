@@ -21,6 +21,7 @@ export interface EducationItem {
   institution: string;
   period: string;
   badge?: string;
+  description?: string;
 }
 
 export interface ProcessStep {

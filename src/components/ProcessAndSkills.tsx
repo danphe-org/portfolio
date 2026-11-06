@@ -1,6 +1,6 @@
 import React from 'react';
 import { PortfolioData } from '../types/portfolio';
-import { GraduationCap, Code2, Database, Cloud } from 'lucide-react';
+import { GraduationCap, Code2, Database, Cloud, AppWindow } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface ProcessAndSkillsProps {
@@ -76,6 +76,11 @@ export const ProcessAndSkills: React.FC<ProcessAndSkillsProps> = ({ data }) => {
                   <p className="text-xs sm:text-sm text-neutral-400 mt-1">
                     {edu.institution}
                   </p>
+                  {edu.description && (
+                    <p className="text-xs text-neutral-300 mt-2.5 leading-relaxed font-normal">
+                      {edu.description}
+                    </p>
+                  )}
                 </motion.div>
               ))}
             </div>
@@ -154,6 +159,53 @@ export const ProcessAndSkills: React.FC<ProcessAndSkillsProps> = ({ data }) => {
                     'REST APIS & OPENAPI',
                     'SPRING SECURITY & JWT',
                     'BUCKET4J RATE LIMITING',
+                  ].map((skill) => (
+                    <motion.span
+                      key={skill}
+                      whileHover={{ 
+                        scale: 1.08, 
+                        y: -2,
+                        backgroundColor: "#1c1c1f",
+                        color: "#ffffff"
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                      transition={{ type: "spring", stiffness: 450, damping: 20 }}
+                      className="px-3 py-1.5 rounded-lg bg-neutral-950 text-neutral-200 text-xs font-semibold uppercase tracking-wide transition-colors shadow-sm cursor-pointer select-none inline-block"
+                    >
+                      {skill}
+                    </motion.span>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Category 2: Fullstack Web & Modern Frontend */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.08 }}
+                whileHover={{ y: -2 }}
+                className="p-5 sm:p-6 rounded-2xl bg-neutral-900/40 space-y-3.5 transition-all"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <AppWindow className="w-3.5 h-3.5 text-[#e31b23]" />
+                    <span className="text-xs font-bold tracking-wider uppercase text-neutral-200">
+                      FULLSTACK WEB & MODERN FRONTEND
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-mono text-[#e31b23] font-bold">REACT / NEXT</span>
+                </div>
+                
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    'REACT.JS (TS / JS)',
+                    'NEXT.JS (SSR & APP ROUTER)',
+                    'TYPESCRIPT',
+                    'JAVASCRIPT (ES6+)',
+                    'TAILWIND CSS',
+                    'STATE MANAGEMENT',
+                    'RESPONSIVE UI ARCHITECTURE',
                   ].map((skill) => (
                     <motion.span
                       key={skill}
