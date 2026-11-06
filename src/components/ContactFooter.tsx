@@ -137,45 +137,6 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({ data }) => {
           <div className="flex items-center gap-2">
             <span>© {new Date().getFullYear()} {data.hero.name}  ·  Kathmandu, Nepal</span>
           </div>
-
-          <div className="flex flex-wrap items-center gap-5 sm:gap-6">
-            <a
-              href={data.contact.linkedin || 'https://linkedin.com/in/nishan-magar'}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white transition-colors flex items-center gap-1.5"
-            >
-              <Linkedin className="w-3.5 h-3.5 text-[#0077b5]" />
-              <span>LinkedIn</span>
-            </a>
-            <a
-              href={data.contact.github || 'https://github.com/nishan9813'}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white transition-colors flex items-center gap-1.5"
-            >
-              <Github className="w-3.5 h-3.5" />
-              <span>GitHub</span>
-            </a>
-            <a
-              href={data.contact.instagram || 'https://instagram.com/'}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white transition-colors flex items-center gap-1.5"
-            >
-              <Instagram className="w-3.5 h-3.5 text-[#E1306C]" />
-              <span>Instagram</span>
-            </a>
-            <a
-              href={data.contact.facebook || 'https://facebook.com/'}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white transition-colors flex items-center gap-1.5"
-            >
-              <Facebook className="w-3.5 h-3.5 text-[#1877F2]" />
-              <span>Facebook</span>
-            </a>
-          </div>
         </div>
 
       </div>
