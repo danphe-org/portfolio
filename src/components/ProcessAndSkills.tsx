@@ -84,40 +84,6 @@ export const ProcessAndSkills: React.FC<ProcessAndSkillsProps> = ({ data }) => {
                 </motion.div>
               ))}
             </div>
-
-            {/* Philosophy Quote Box with subtle breathing aura */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              whileHover={{ scale: 1.01 }}
-              className="p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-[#1a0507] via-[#120405] to-[#0a0203] relative overflow-hidden"
-            >
-              <motion.div 
-                animate={{
-                  scale: [1, 1.25, 1],
-                  opacity: [0.15, 0.3, 0.15],
-                }}
-                transition={{
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                className="absolute top-0 right-0 w-28 h-28 bg-[#e31b23]/15 blur-2xl pointer-events-none rounded-full" 
-              />
-              <p className="text-xs sm:text-sm text-neutral-300 italic leading-relaxed relative z-10">
-                "{data.quote.text}"
-              </p>
-              <div className="flex items-center justify-between mt-3 pt-3 relative z-10">
-                <span className="text-[11px] font-bold text-[#e31b23] uppercase tracking-widest">
-                  — {data.quote.author}
-                </span>
-                <span className="font-script text-xl text-neutral-200 -rotate-3 select-none">
-                  {data.quote.signatureName}
-                </span>
-              </div>
-            </motion.div>
           </div>
 
           {/* ============================================================ */}

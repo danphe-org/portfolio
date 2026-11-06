@@ -82,7 +82,7 @@ export const portfolioData: PortfolioData = {
       institution: 'Aricalot Technology, Kathmandu',
       period: '2023 - 2026',
       badge: 'Fullstack Web, Spring Boot & React / Next.js',
-      description: 'Hands-on production experience engineering end-to-end fullstack systems — building scalable Spring Boot REST APIs and integrating modern responsive web frontends using React (TypeScript/JavaScript) and Next.js.',
+      description: 'Hands-on production experience engineering end-to-end fullstack systems and building scalable Spring Boot REST APIs and integrating modern responsive web frontends using React (TypeScript/JavaScript) and Next.js.',
     },
   ],
   skills: [
