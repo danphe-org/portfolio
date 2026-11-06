@@ -1,0 +1,7 @@
+services:
+  portfolio:
+    build: .
+    container_name: nishan-portfolio
+    restart: unless-stopped
+    ports:
+      - "3031:3031"

@@ -27,7 +27,8 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Copy compiled production bundle from builder stage
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Expose HTTP port
+# Expose deployment ports
+EXPOSE 3031
 EXPOSE 80
 
 # Start Nginx in foreground
